@@ -17,6 +17,7 @@ import {
 interface ConfirmMentorshipProps {
   match: ConfirmMentorshipMatchPropFragment
   menteeName?: string
+  hasReachedMenteeLimit?: boolean
 }
 
 interface ConfirmMentorshipFormValues {
@@ -37,7 +38,10 @@ const validationSchema = Yup.object({
     .max(MAX_CHARS_COUNT),
 })
 
-const ConfirmMentorship = ({ match }: ConfirmMentorshipProps) => {
+const ConfirmMentorship = ({
+  match,
+  hasReachedMenteeLimit,
+}: ConfirmMentorshipProps) => {
   const queryClient = useQueryClient()
   const acceptMentorshipMutation = useAcceptMentorshipMutation()
   const [isModalActive, setModalActive] = useState(false)
@@ -73,7 +77,12 @@ const ConfirmMentorship = ({ match }: ConfirmMentorshipProps) => {
 
   return (
     <>
-      <Button onClick={() => setModalActive(true)}>Accept</Button>
+      <Button
+        onClick={() => setModalActive(true)}
+        disabled={hasReachedMenteeLimit}
+      >
+        Accept
+      </Button>
       <Modal
         show={isModalActive}
         stateFn={setModalActive}

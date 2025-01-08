@@ -34,6 +34,9 @@ const ApplicationCard = ({ application }: Props) => {
 
   const hasReachedMenteeLimit =
     myProfileQuery.data.conProfile.doesNotHaveAvailableMentorshipSlot
+
+  console.log('hasReachedMenteeLimit', hasReachedMenteeLimit)
+
   const currentUser = myProfileQuery.data.conProfile
 
   const {
@@ -147,7 +150,10 @@ const ApplicationCard = ({ application }: Props) => {
         {currentUserIsMentor &&
         application.status === MentorshipMatchStatus.Applied ? (
           <>
-            <ConfirmMentorship match={application} />
+            <ConfirmMentorship
+              match={application}
+              hasReachedMenteeLimit={hasReachedMenteeLimit}
+            />
             <DeclineMentorshipButton match={application} />
           </>
         ) : null}
