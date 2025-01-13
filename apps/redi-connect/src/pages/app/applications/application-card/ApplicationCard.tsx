@@ -32,10 +32,10 @@ const ApplicationCard = ({ application }: Props) => {
   const loopbackUserId = getAccessTokenFromLocalStorage().userId
   const myProfileQuery = useLoadMyProfileQuery({ loopbackUserId })
 
-  const hasReachedMenteeLimit =
+  const hasReachedDesiredMenteeLimit =
     myProfileQuery.data.conProfile.doesNotHaveAvailableMentorshipSlot
 
-  console.log('hasReachedMenteeLimit', hasReachedMenteeLimit)
+  const menteeCountCapacity = myProfileQuery.data.conProfile.menteeCountCapacity
 
   const currentUser = myProfileQuery.data.conProfile
 
@@ -152,7 +152,8 @@ const ApplicationCard = ({ application }: Props) => {
           <>
             <ConfirmMentorship
               match={application}
-              hasReachedMenteeLimit={hasReachedMenteeLimit}
+              hasReachedDesiredMenteeLimit={hasReachedDesiredMenteeLimit}
+              menteeCountCapacity={menteeCountCapacity}
             />
             <DeclineMentorshipButton match={application} />
           </>
