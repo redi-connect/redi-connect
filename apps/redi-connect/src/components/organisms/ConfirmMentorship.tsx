@@ -82,8 +82,7 @@ const ConfirmMentorship = ({
     <>
       {hasReachedDesiredMenteeLimit ? (
         <>
-          {hasReachedDesiredMenteeLimit &&
-          menteeCountCapacity === MAX_MENTEE_LIMIT ? (
+          {menteeCountCapacity === MAX_MENTEE_LIMIT ? (
             <Notification color="info" className="is-light">
               You've reached our recommended maximum number of mentees. If you
               wish to mentor more than 2 mentees at the same time, please reach
